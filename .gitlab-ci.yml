@@ -1,0 +1,46 @@
+stages:
+  - build
+  - test
+  - deploy_dev
+  - deploy_test
+  - deploy_prod
+
+variables:
+  DB_NAME: "build-service-gin"
+  SERVICE_ID: "build-service-gin"
+
+before_script:
+  - echo "Running before script..."
+
+build:
+  stage: build
+  image: golang:1.23
+  script:
+    - go mod tidy
+    - go build -o build-service-gin .
+
+test:
+  stage: test
+  image: golang:1.23
+  script:
+    - go test ./... -v
+
+deploy_dev:
+  stage: deploy_dev
+  image: alpine:latest
+  script:
+    - echo "Deploying to development environment..."
+
+deploy_test:
+  stage: deploy_test
+  image: alpine:latest
+  script:
+    - echo "Deploying to test environment..."
+
+deploy_prod:
+  stage: deploy_prod
+  image: alpine:latest
+  script:
+    - echo "Deploying to production environment..."
+
+

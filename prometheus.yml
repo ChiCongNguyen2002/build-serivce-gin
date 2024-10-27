@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'build-service'
+    static_configs:
+      - targets: ['localhost:3001']
+
+  - job_name: 'metrics'
+    static_configs:
+      - targets: ['localhost:3001']
